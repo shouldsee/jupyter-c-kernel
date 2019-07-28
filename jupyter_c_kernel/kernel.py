@@ -109,8 +109,8 @@ class CKernel(Kernel):
 
     def create_jupyter_subprocess(self, cmd):
         return RealTimeSubprocess(cmd,
-                                  lambda contents: self._write_to_stdout(contents.decode()),
-                                  lambda contents: self._write_to_stderr(contents.decode()))
+                                  lambda contents: self._write_to_stdout(contents.decode('utf8')),
+                                  lambda contents: self._write_to_stderr(contents.decode('utf8')))
 
     def compile_with_gcc(self, source_filename, binary_filename, cflags=None, ldflags=None):
         cflags = ['-std=c11', '-fPIC', '-shared', '-rdynamic'] + cflags
